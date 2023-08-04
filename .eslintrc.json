@@ -8,6 +8,7 @@
     "prettier/prettier": "error",
     "no-unused-vars": "error",
     "no-console": "off",
-    "import/extensions": "off" // when importing file it's not working without extension
+    "import/extensions": "off", // when importing file it's not working without extension
+    "allowImportExportEverywhere": true
   }
 }
