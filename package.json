@@ -1,0 +1,25 @@
+{
+  "name": "playawards",
+  "version": "1.0.0",
+  "description": "project for creating, login and password reset for user",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/faparipik/playAwards.git"
+  },
+  "keywords": [
+    "user",
+    "login",
+    "password",
+    "reset"
+  ],
+  "author": "Faruk Bruncevic",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/faparipik/playAwards/issues"
+  },
+  "homepage": "https://github.com/faparipik/playAwards#readme"
+}
