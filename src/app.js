@@ -1,5 +1,6 @@
 import express from 'express';
 import xss from 'xss-clean';
+import helmet from 'helmet';
 
 import morgan from './config/morgan.js';
 import env from './config/config.js';
@@ -9,6 +10,9 @@ if (env.env !== 'test') {
   app.use(morgan.successHandler);
   app.use(morgan.errorHandler);
 }
+
+// set security HTTP headers
+app.use(helmet());
 
 // parse json request body
 app.use(express.json());
