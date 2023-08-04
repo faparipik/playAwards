@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "project for creating, login and password reset for user",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "npm run test"
   },
