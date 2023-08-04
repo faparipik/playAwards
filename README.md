@@ -4,7 +4,16 @@
 
 ## Table of Contents
 
+- [Commands](#commands)
 - [Linting](#linting)
+
+## Commands
+
+Running project locally:
+
+```bash
+npm run start:dev
+```
 
 ## Linting
 
