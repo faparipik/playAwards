@@ -15,6 +15,13 @@ Running project locally:
 npm run start:dev
 ```
 
+Running project with Docker:
+
+```bash
+docker-compose build && docker-compose up
+```
+
+
 ## Linting
 
 Linting is done using [ESLint](https://eslint.org/) and [Prettier](https://prettier.io).
