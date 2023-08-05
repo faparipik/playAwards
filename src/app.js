@@ -7,6 +7,7 @@ import morgan from './config/morgan.js';
 import env from './config/config.js';
 import ApiError from './utils/ApiErrors.js';
 import errorMiddleware from './middlewares/error.js';
+import routes from './routes/v1/index.js';
 
 const app = express();
 
@@ -29,6 +30,8 @@ app.use(xss());
 app.get('/test', (_req, res) => {
   res.send('hello world');
 });
+
+app.use('/v1', routes);
 
 // send back a 404 error for any unknown api request
 app.use((_req, _res, next) => {
