@@ -1,7 +1,6 @@
 import httpStatus from 'http-status';
 import userRepository from '../repositories/user.repository.js';
 import ApiError from '../utils/ApiErrors.js';
-import db from '../config/db.js';
 
 const createUser = (userBody) => {
   if (userRepository.isEmailTaken(userBody.email)) {
@@ -11,6 +10,11 @@ const createUser = (userBody) => {
   return userRepository.create(userBody);
 };
 
+const findUserById = (id) => {
+  return userRepository.findUserById(id);
+};
+
 export default {
   createUser,
+  findUserById,
 };

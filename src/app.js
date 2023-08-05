@@ -2,12 +2,14 @@ import express from 'express';
 import xss from 'xss-clean';
 import helmet from 'helmet';
 import httpStatus from 'http-status';
+import passport from 'passport';
 
 import morgan from './config/morgan.js';
 import env from './config/config.js';
 import ApiError from './utils/ApiErrors.js';
 import errorMiddleware from './middlewares/error.js';
 import routes from './routes/v1/index.js';
+import { jwtStrategy } from './config/passport.js';
 
 const app = express();
 
@@ -26,6 +28,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(xss());
+
+app.use(passport.initialize());
+passport.use('jwt', jwtStrategy);
 
 app.get('/test', (_req, res) => {
   res.send('hello world');

@@ -21,7 +21,13 @@ const create = ({ email, name, password }) => {
   return result;
 };
 
+const findUserById = (id) => {
+  const result = db.query('SELECT * FROM user WHERE id = @id', { id });
+  return result;
+};
+
 export default {
   isEmailTaken,
   create,
+  findUserById,
 };
