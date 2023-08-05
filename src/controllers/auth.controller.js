@@ -1,5 +1,6 @@
 import catchAsync from '../utils/catchAsync.js';
 import userService from '../service/user.service.js';
+import tokenService from '../service/token.services.js';
 import httpStatus from 'http-status';
 
 const register = catchAsync(async (req, res) => {
@@ -10,8 +11,9 @@ const register = catchAsync(async (req, res) => {
 const login = catchAsync(async (req, res) => {
   const { email, password } = req.body;
   const user = await userService.loginUser(email, password);
+  const token = await tokenService.generateAuthToken(user);
 
-  res.send(user);
+  res.send({ user, token });
 });
 
 export default {
