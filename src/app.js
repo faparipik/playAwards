@@ -1,9 +1,13 @@
 import express from 'express';
 import xss from 'xss-clean';
 import helmet from 'helmet';
+import httpStatus from 'http-status';
 
 import morgan from './config/morgan.js';
 import env from './config/config.js';
+import ApiError from './utils/ApiErrors.js';
+import errorMiddleware from './middlewares/error.js';
+
 const app = express();
 
 if (env.env !== 'test') {
@@ -25,5 +29,16 @@ app.use(xss());
 app.get('/test', (_req, res) => {
   res.send('hello world');
 });
+
+// send back a 404 error for any unknown api request
+app.use((_req, _res, next) => {
+  next(new ApiError(httpStatus.NOT_FOUND, 'Not found'));
+});
+
+// convert error to ApiError, if needed
+app.use(errorMiddleware.errorConverter);
+
+// handle error
+app.use(errorMiddleware.errorHandler);
 
 export default app;
