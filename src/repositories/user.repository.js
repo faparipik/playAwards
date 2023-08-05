@@ -1,20 +1,21 @@
 import db from '../config/db.js';
 import { nanoid } from 'nanoid';
 import _ from 'lodash';
+import bcrypt from 'bcryptjs';
 
 const isEmailTaken = (email) => {
   const result = db.query('SELECT * FROM user WHERE email = $email', { email });
   return !_.isEmpty(result);
 };
 
-const create = ({ email, name, password }) => {
+const create = async ({ email, name, password }) => {
   const result = db.run(
     'INSERT INTO user (id, name, email, password) VALUES (@id, @name, @email, @password)',
     {
       id: nanoid(),
       name,
       email,
-      password,
+      password: await bcrypt.hash(password, 8),
     },
   );
 
@@ -26,8 +27,16 @@ const findUserById = (id) => {
   return result;
 };
 
+const getUserByEmail = (email) => {
+  const result = db.query('SELECT * FROM user WHERE email = @email', {
+    email,
+  });
+  return result;
+};
+
 export default {
   isEmailTaken,
   create,
   findUserById,
+  getUserByEmail,
 };

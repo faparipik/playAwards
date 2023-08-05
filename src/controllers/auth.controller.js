@@ -7,6 +7,14 @@ const register = catchAsync(async (req, res) => {
   res.status(httpStatus.CREATED).send(result);
 });
 
+const login = catchAsync(async (req, res) => {
+  const { email, password } = req.body;
+  const user = await userService.loginUser(email, password);
+
+  res.send(user);
+});
+
 export default {
   register,
+  login,
 };
