@@ -1,7 +1,10 @@
+import httpStatus from 'http-status';
+
 import catchAsync from '../utils/catchAsync.js';
 import userService from '../service/user.service.js';
 import tokenService from '../service/token.services.js';
-import httpStatus from 'http-status';
+import emailServices from '../service/email.services.js';
+import config from '../config/config.js';
 
 const register = catchAsync(async (req, res) => {
   const result = await userService.createUser(req.body);
@@ -12,18 +15,22 @@ const register = catchAsync(async (req, res) => {
 const login = catchAsync(async (req, res) => {
   const { email, password } = req.body;
   const user = await userService.loginUser(email, password);
-  const token = await tokenService.generateAuthToken(user);
+  const token = tokenService.generateAuthToken(user);
 
   res.cookie('AuthToken', token);
   res.redirect('/protected');
-  res.send({ user, token });
 });
 
 const forgotPassword = catchAsync(async (req, res) => {
-  const resetPasswordToken = await tokenService.generateResetPasswordToken(
+  const resetPasswordToken = tokenService.generateResetPasswordToken(
     req.body.email,
   );
-  res.send(resetPasswordToken);
+
+  emailServices.sendEmail(
+    req.body.email,
+    `To reset your password please go to Link: ${config.resetPasswordUrl}/reset-password?token=${resetPasswordToken}`,
+  );
+  res.status(httpStatus.NO_CONTENT).send();
 });
 
 export default {

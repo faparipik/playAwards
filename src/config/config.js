@@ -22,6 +22,9 @@ const envVarsSchema = Joi.object()
     JWT_RESET_PASSWORD_EXPIRATION_MINUTES: Joi.number()
       .default(10)
       .description('minutes after which reset password token expires'),
+    MAILGUN_API_KEY: Joi.string().required(),
+    MAILGUN_DOMAIN: Joi.string().required(),
+    RESET_PASSWORD_URL: Joi.string().required(),
   })
   .unknown();
 
@@ -42,4 +45,7 @@ export default {
     resetPasswordExpirationMinutes:
       envVars.JWT_RESET_PASSWORD_EXPIRATION_MINUTES,
   },
+  mailgunApiKey: envVars.MAILGUN_API_KEY,
+  mailgunDomain: envVars.MAILGUN_DOMAIN,
+  resetPasswordUrl: envVars.RESET_PASSWORD_URL,
 };
