@@ -50,4 +50,23 @@ const saveToken = (token, userId, expires, type) => {
   tokenRepository.create(token, userId, expires, type);
 };
 
-export default { generateAuthToken, generateResetPasswordToken, saveToken };
+const verifyToken = (token, type) => {
+  const payload = jwt.verify(token, config.jwt.secret);
+  const tokenDoc = tokenRepository.findToken(token, type, payload.sub);
+  if (!tokenDoc[0]) {
+    throw new Error('Token not Found');
+  }
+  return tokenDoc[0];
+};
+
+const deleteMany = (userId, type) => {
+  tokenRepository.deleteMany(userId, type);
+};
+
+export default {
+  generateAuthToken,
+  generateResetPasswordToken,
+  saveToken,
+  verifyToken,
+  deleteMany,
+};

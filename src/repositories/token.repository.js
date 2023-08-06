@@ -14,6 +14,23 @@ const create = async (token, userId, expires, type) => {
   return result;
 };
 
+const findToken = (token, type, user) => {
+  const result = db.query(
+    'SELECT * FROM token WHERE id = @token AND type = @type AND user_id = @userId',
+    { token, type, userId: user },
+  );
+  return result;
+};
+
+const deleteMany = (userId, type) => {
+  db.run('DELETE FROM token WHERE user_id = @userId AND type = @type', {
+    userId,
+    type,
+  });
+};
+
 export default {
   create,
+  findToken,
+  deleteMany,
 };

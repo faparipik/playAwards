@@ -58,6 +58,18 @@ app.get(
     res.render('protected');
   },
 );
+
+app.get('/reset-password', (req, res) => {
+  res.render('reset-password', {
+    query: req.query,
+  });
+});
+
+app.get('/forgot-password', (req, res) => {
+  res.render('forgot-password', {
+    query: req.query,
+  });
+});
 // send back a 404 error for any unknown api request
 app.use((_req, _res, next) => {
   next(new ApiError(httpStatus.NOT_FOUND, 'Not found'));

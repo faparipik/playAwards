@@ -34,9 +34,17 @@ const getUserByEmail = (email) => {
   return result;
 };
 
+const updateUserById = async (userId, { password }) => {
+  db.run('UPDATE user SET password = @password WHERE id = @userId', {
+    userId,
+    password: await bcrypt.hash(password, 8),
+  });
+};
+
 export default {
   isEmailTaken,
   create,
   findUserById,
   getUserByEmail,
+  updateUserById,
 };

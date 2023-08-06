@@ -4,6 +4,7 @@ import catchAsync from '../utils/catchAsync.js';
 import userService from '../service/user.service.js';
 import tokenService from '../service/token.services.js';
 import emailServices from '../service/email.services.js';
+import authServices from '../service/auth.services.js';
 import config from '../config/config.js';
 
 const register = catchAsync(async (req, res) => {
@@ -30,11 +31,17 @@ const forgotPassword = catchAsync(async (req, res) => {
     req.body.email,
     `To reset your password please go to Link: ${config.resetPasswordUrl}/reset-password?token=${resetPasswordToken}`,
   );
-  res.status(httpStatus.NO_CONTENT).send();
+  res.redirect('/login');
+});
+
+const resetPassword = catchAsync((req, res) => {
+  authServices.resetPassword(req.query.token, req.body.password);
+  res.redirect('/login');
 });
 
 export default {
   register,
   login,
   forgotPassword,
+  resetPassword,
 };

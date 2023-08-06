@@ -30,6 +30,10 @@ const loginUser = async (email, password) => {
   return user[0];
 };
 
+const updateUserById = (userId, updateValues) => {
+  userRepository.updateUserById(userId, updateValues);
+};
+
 const isPasswordMatch = async (providedPassword, userPassword) => {
   return await bcrypt.compare(providedPassword, userPassword);
 };
@@ -40,4 +44,5 @@ export default {
   loginUser,
   isPasswordMatch,
   findUserByEmail,
+  updateUserById,
 };
