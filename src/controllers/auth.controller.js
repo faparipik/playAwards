@@ -5,6 +5,7 @@ import httpStatus from 'http-status';
 
 const register = catchAsync(async (req, res) => {
   const result = await userService.createUser(req.body);
+  res.redirect('/login');
   res.status(httpStatus.CREATED).send(result);
 });
 
