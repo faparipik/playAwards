@@ -52,6 +52,8 @@
     "nanoid": "^4.0.2",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.1",
+    "swagger-autogen": "^2.23.5",
+    "swagger-ui-express": "^5.0.0",
     "winston": "^3.10.0",
     "xss-clean": "^0.1.4"
   }
