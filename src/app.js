@@ -3,6 +3,7 @@ import xss from 'xss-clean';
 import helmet from 'helmet';
 import httpStatus from 'http-status';
 import passport from 'passport';
+import cookieParser from 'cookie-parser';
 
 import morgan from './config/morgan.js';
 import env from './config/config.js';
@@ -27,6 +28,8 @@ app.use(express.json());
 // parse urlencoded request body
 app.use(express.urlencoded({ extended: true }));
 
+app.use(cookieParser());
+
 app.use(xss());
 
 app.use(passport.initialize());
@@ -44,6 +47,17 @@ app.get('/register', (req, res) => {
   res.render('register');
 });
 
+app.get('/login', (req, res) => {
+  res.render('login');
+});
+
+app.get(
+  '/protected',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    res.render('protected');
+  },
+);
 // send back a 404 error for any unknown api request
 app.use((_req, _res, next) => {
   next(new ApiError(httpStatus.NOT_FOUND, 'Not found'));

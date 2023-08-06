@@ -3,9 +3,18 @@ import config from './config.js';
 import { tokenTypes } from '../constants/token.constants.js';
 import userService from '../service/user.service.js';
 
+var cookieExtractor = function (req) {
+  var token = null;
+  if (req && req.cookies) {
+    token = req.cookies['AuthToken'];
+  }
+
+  return token;
+};
+
 const jwtOptions = {
   secretOrKey: config.jwt.secret,
-  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+  jwtFromRequest: cookieExtractor,
 };
 
 const jwtVerify = (payload, done) => {

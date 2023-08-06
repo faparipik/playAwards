@@ -14,6 +14,8 @@ const login = catchAsync(async (req, res) => {
   const user = await userService.loginUser(email, password);
   const token = await tokenService.generateAuthToken(user);
 
+  res.cookie('AuthToken', token);
+  res.redirect('/protected');
   res.send({ user, token });
 });
 
