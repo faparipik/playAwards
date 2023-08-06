@@ -22,8 +22,18 @@ const forgotPassword = {
   }),
 };
 
+const resetPassword = {
+  body: Joi.object().keys({
+    password: Joi.string().required().custom(customValidation.password),
+  }),
+  query: Joi.object().keys({
+    token: Joi.string().required(),
+  }),
+};
+
 export default {
   register,
   login,
   forgotPassword,
+  resetPassword,
 };
