@@ -10,6 +10,7 @@ import env from './config/config.js';
 import ApiError from './utils/ApiErrors.js';
 import errorMiddleware from './middlewares/error.js';
 import routes from './routes/v1/index.js';
+import pagesRoutes from './routes/pages/index.js';
 import { jwtStrategy } from './config/passport.js';
 
 const app = express();
@@ -43,33 +44,8 @@ app.use('/v1', routes);
 
 app.set('view engine', 'hbs');
 
-app.get('/register', (req, res) => {
-  res.render('register');
-});
+app.use('/', pagesRoutes);
 
-app.get('/login', (req, res) => {
-  res.render('login');
-});
-
-app.get(
-  '/protected',
-  passport.authenticate('jwt', { session: false }),
-  (req, res) => {
-    res.render('protected');
-  },
-);
-
-app.get('/reset-password', (req, res) => {
-  res.render('reset-password', {
-    query: req.query,
-  });
-});
-
-app.get('/forgot-password', (req, res) => {
-  res.render('forgot-password', {
-    query: req.query,
-  });
-});
 // send back a 404 error for any unknown api request
 app.use((_req, _res, next) => {
   next(new ApiError(httpStatus.NOT_FOUND, 'Not found'));
