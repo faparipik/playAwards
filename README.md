@@ -25,6 +25,48 @@ npm install
 npm start
 ```
 
+For Swagger Documentation go to this URL:
+```
+http://localhost:3000/v1/docs
+```
+
+## API's
+
+### USER REGISTER
+
+To Register new User go to this URL:
+```
+http://localhost:3000/register
+```
+
+To help you understand how register works you can check out this diagram:
+
+![plot](./images/register%20diagram%20play%20awards%20task.jpg)
+
+### LOGIN USER
+
+
+To Login with existing user go to this URL:
+```
+http://localhost:3000/login
+```
+
+To help you understand how login works you can check out this diagram:
+
+![plot](./images/loginDiagram.jpg)
+
+### RESET USER PASSWORD
+
+To reset your password go to this URL:
+```
+http://localhost:3000/forgot-password
+```
+
+To help you understand how to reset password you can check out this diagram:
+
+![plot](./images/restart%20password.jpg)
+
+
 ## Table of Contents
 
 - [Commands](#commands)
