@@ -12,5 +12,10 @@ router.post(
 );
 
 router.post('/login', validate(authValidation.login), authController.login);
+router.post(
+  '/forgot-password',
+  validate(authValidation.forgotPassword),
+  authController.forgotPassword,
+);
 
 export default router;

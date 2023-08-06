@@ -19,7 +19,15 @@ const login = catchAsync(async (req, res) => {
   res.send({ user, token });
 });
 
+const forgotPassword = catchAsync(async (req, res) => {
+  const resetPasswordToken = await tokenService.generateResetPasswordToken(
+    req.body.email,
+  );
+  res.send(resetPasswordToken);
+});
+
 export default {
   register,
   login,
+  forgotPassword,
 };

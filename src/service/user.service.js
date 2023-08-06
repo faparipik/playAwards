@@ -16,10 +16,14 @@ const findUserById = (id) => {
   return userRepository.findUserById(id);
 };
 
+const findUserByEmail = (email) => {
+  return userRepository.getUserByEmail(email);
+};
+
 const loginUser = async (email, password) => {
   const user = userRepository.getUserByEmail(email);
 
-  if (!user || !(await isPasswordMatch(password, user[0].password))) {
+  if (!user[0] || !(await isPasswordMatch(password, user[0].password))) {
     throw new ApiError(httpStatus.UNAUTHORIZED, 'Incorect email or password');
   }
 
@@ -35,4 +39,5 @@ export default {
   findUserById,
   loginUser,
   isPasswordMatch,
+  findUserByEmail,
 };

@@ -16,7 +16,14 @@ const login = {
   }),
 };
 
+const forgotPassword = {
+  body: Joi.object().keys({
+    email: Joi.string().required().email(),
+  }),
+};
+
 export default {
   register,
   login,
+  forgotPassword,
 };
