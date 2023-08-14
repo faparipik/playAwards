@@ -25,7 +25,7 @@ npm install
 npm start
 ```
 
-For Swagger Documentation go to this URL:
+For Swagger Documentation go to this URL::
 ```
 http://localhost:3000/v1/docs
 ```
